@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%
+% This CV example/template is based on my own
+% CV which I (lamely attempted) to clean up, so that
+% it's less of an eyesore and easier for others to use.
+%
+% LianTze Lim (liantze@gmail.com)
+% 13 May, 2020
+%
+\documentclass[a4paper,skipsamekey,11pt,english]{curve}
+
+% Uncomment to enable Chinese; needs XeLaTeX
+% \usepackage{ctex}
+
+\usepackage{settings}
+\usepackage{academicons}
+% ICON LIST: http://mirrors.ibiblio.org/CTAN/fonts/fontawesome5/doc/fontawesome5.pdf
+
+% Change the fonts if you want
+\ifxetexorluatex % If you're using XeLaTeX or LuaLaTeX
+  \usepackage{fontspec} 
+  %% You can use \setmainfont etc; I'm just using these font packages here because they provide OpenType fonts for use by XeLaTeX/LuaLaTeX anyway
+  \usepackage[p,osf,swashQ]{cochineal}
+  \usepackage[medium,bold]{cabin}
+  \usepackage[varqu,varl,scale=0.9]{zi4}
+\else % If you're using pdfLaTeX or latex
+  \usepackage[T1]{fontenc}
+  \usepackage[p,osf,swashQ]{cochineal}
+  \usepackage{cabin}
+  \usepackage[varqu,varl,scale=0.9]{zi4}
+\fi
+
+%% Only needed if you want a Publication List
+\addbibresource{own-bib.bib}
+
+%% Specify your last name and first name (as given in the .bib) to automatically bold your own name in the publications list. One caveat: You need to write \bibnamedelima where there's a space in your name for this to work properly for now...
+\myname{Lim}{Lian\bibnamedelima Tze}
+% \myname{d'Andrimont}{Raphaël}
+
+% Change the page margins if you want
+% \geometry{left=1cm,right=1cm,top=1.5cm,bottom=1.5cm}
+
+% Change the colours if you want
+% \definecolor{SwishLineColour}{HTML}{00FFFF}
+% \definecolor{MarkerColour}{HTML}{0000CC}
+
+
+% \definecolor{faORCID}{HTML}{A6CE39}
+% \definecolor{faOutlook}{HTML}{0072C6}
+\definecolor{faORCID}{HTML}{34A853}
+\definecolor{faOutlook}{HTML}{4285F4}
+\definecolor{faMapMarker}{HTML}{EA4335}
+\definecolor{faPhone}{HTML}{FBBC05}
+
+\definecolor{faHTML5}{HTML}{e34c26}
+\definecolor{faCSS3}{HTML}{264de4}
+\definecolor{faBootstrap}{HTML}{563d7c}
+\definecolor{faJS}{HTML}{f0db4f}
+\definecolor{faReact}{HTML}{7cc5d9}
+\definecolor{faNode}{HTML}{44883e}
+\definecolor{faPython}{HTML}{4584B6}
+\definecolor{faJava}{HTML}{f89820}
+\definecolor{faPHP}{HTML}{8993be}
+\definecolor{faGmail}{HTML}{BB001B}
+
+% social media
+\definecolor{faTwitter}{HTML}{00acee}
+\definecolor{faLinkedinIn}{HTML}{0e76a8}
+
+
+
+% Change the item prefix marker if you want
+% \prefixmarker{$\diamond$}
+
+%% Photo is only shown if "fullonly" is included
+\includecomment{fullonly}
+% \excludecomment{fullonly}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\leftheader{%
+  {\LARGE\bfseries\sffamily Muhammad Ashfaq} 
+  
+  \makefield{{\color{faMapMarker}\faMapMarker}}
+  {
+    \href{https://goo.gl/maps/BZPiZgxLHjzeWbBr6}
+    {Current: Trento, Italy.} 
+    \href{https://goo.gl/maps/Ydpp8A3Lb7w5wKaD6}
+    {Permanent: Sialkot, Pakistan.} 
+  }
+  
+  \makefield{\href{https://orcid.org/0000-0003-1870-7680}{\color{faORCID}\faOrcid}}
+  {\url{https://orcid.org/0000-0003-1870-7680}}
+  
+  
+    \makefield{\href{mailto:ashfaq92@outlook.com}{\color{faOutlook}\faEnvelope}}
+    {\href{mailto:ashfaq92@outlook.com}{\texttt{ashfaq92@outlook.com}}}
+    
+  \makefield{\href{tel:+393383850751}{\color{faPhone}\faPhone}}
+  {\href{tel:+393383850751}{\texttt{+39 338 385 0751}}}
+}
+
+\rightheader{~}
+\begin{fullonly}
+% \photo[r]{photo}
+
+\photoscale{0.13}
+\end{fullonly}
+
+\title{Curriculum Vitae}
+
+\begin{document}
+
+% \begin{minipage}{\textwidth}
+
+
+\makeheaders[c]
+
+\makerubric{education}
+\makerubric{experience}
+\input{publications}
+\makerubric{skills}
+\makerubric{projects}
+
+
+\makerubric{additional}
+% \makerubric{referee}
+\input{referee-full}
+\input{social}
+
+
+
+\end{document}
