@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iRock</title>
+    <style>
+        body {
+            height: 100vh;
+        }
+        .container {
+            margin-top:100px; 
+            text-align:center;
+        }
+    </style>
+    <script type="text/javascript" src="../cookie.js"></script>
+    <script type="text/javascript">
+        const greetRock = () => {
+            if (navigator.cookieEnabled) {
+                const name = getCookie('name') 
+                if (name) {
+                    alert(`welcome back ${name}`)
+                }
+            }
+            else {
+                alert(`Hi, I am your pet rock`)
+            }
+        }
+        const touchRock = () =>  {
+            if (navigator.cookieEnabled && getCookie('name')) {    
+                alert(`I like attention ${name}.`)
+            }    
+            else {
+                const inputName = prompt('what is your name?')
+                alert(`Nice to meet you, ${inputName}`)
+                if (navigator.cookieEnabled) {
+                    setCookie('name', inputName, 1)
+                }
+                else {
+                    alert("Sorry, Cookies aren't supported/enables in your browser. I won't remember you later")
+                }
+            }
+            
+            document.getElementById("rockImg").src = "rock_happy.png"
+            setTimeout(() => {  document.getElementById("rockImg").src = "rock_lonely.png" }, 1*60*1000);
+            rageRock()      
+        }
+        const rageRock = () => {
+            setTimeout( () => { document.getElementById('rockImg').src = 'rock_rage.png' }, Math.random() * 10000  )
+        }
+        const resizeRock = () => {
+            let rockHeight = (document.body.clientHeight - 100) * 0.9
+            document.getElementById('rockImg').style.height = rockHeight+"px"
+
+        }
+        
+    </script>
+</head>
+<body onload="greetRock(); resizeRock()" onresize="resizeRock()">
+    <div class="container">
+        <h3>Tap on the rock to get started</h3>
+        <img src="rock_lonely.png" alt="Rock Img" id="rockImg" onclick="touchRock()" />
+        <button onclick="eraseCookie('name')">Erase cookie</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stick Figure Adventure</title>
+    <style>
+        body {
+            margin-top: 100px;
+            text-align: center;
+        }
+        #storyText {
+            color: green
+        }
+    </style>
+    <script>
+        let curScene = 0
+        let outputElement
+        window.onload = event => {
+            outputElement = document.getElementById('storyText') 
+        }
+        const setScene = (id) => {
+            document.getElementById('scenes').src = `./scene${id}.png`
+        }
+        const changeScene = (val) => {
+            let message = ''
+            switch (curScene) {
+                case 0:
+                    curScene = 1
+                    message = 'Journey begins by taking a fork'
+                    break
+                case 1:
+                    if (val == 1) {
+                        message = 'You reached at a hut in the woods.'
+                        curScene = 2
+                    } else if (val == 2) {
+                        message = 'You are standing on the bridge enjoying the water flow.'
+                        curScene = 3
+                    }
+                    break
+                case 2:
+                    if (val == 1) {
+                        message = 'You see a witch in the hut'
+                        curScene = 4
+                    } else if (val == 2) {
+                        message = 'knock the door'
+                        curScene = 5
+                    }
+                    break
+                case 3:
+                if (val == 1 ) {
+                    message = 'walk down the bridge'
+                    curScene = 6
+                } else if (val == 2) {
+                    message = 'graze into the stream'
+                    curScene = 7
+                }
+                    break
+                case 4:
+                if (val == 1) {
+                    message = 'sneaking, you are done!'
+                    curScene = 5
+                } else if (val == 2) {
+                    message = 'waving at witch doesnt work, you are done!'
+                    curScene = 5  
+                }
+                    break
+                case 5:
+                    message = 'will be updated soon. Play again?'
+                    curScene = 8
+                    break
+                case 6:
+                    message = 'You got eaten by the Troll!'
+                    curScene = 8
+                    break
+                case 7:
+                    if (val == 1) {
+                        curScene = 6
+                        message = 'will be updated soon. Play again?'
+                    } else if (val == 2) {
+                        message = 'Drowned!'
+                        curScene = 8
+                    }
+                    break
+                default:
+                    alert('unknown error!')
+                    reset()
+                    break;
+            }
+            setScene(curScene)
+            outputElement.innerHTML = message            
+        }
+        const reset = () => {
+            curScene = 0
+            setScene(curScene)
+            outputElement.innerHTML = ''
+        }
+        const back = () => {
+            curScene--
+            setScene(curScene)
+        }
+    </script>
+</head>
+<body>
+    <img id="scenes" src="./scene0.png" />
+    <br/>
+    <div id="storyText">Lets start!</div>
+    <br/>
+    <button type="button" onclick="changeScene(1)">1</button>
+    <button type="button" onclick="changeScene(2)">2</button>
+    <button type="button" onclick="reset()">reset</button>
+    <button type="button" onclick="back()">Back</button>
+</body>
+</html>

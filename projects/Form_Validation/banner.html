@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bannerocity</title>
+    <style>
+        .data-form {
+            padding: 1rem;
+        }
+        .banner{
+            width: 100%;
+        }
+        .form-group {
+            margin-top: 0.5rem;
+        }
+        label, input {
+            display: inline-block;
+            vertical-align: baseline;
+            width: 200px;
+        }
+        
+
+    </style>
+    <script>
+        const submitHandler = (e) => {
+            e.preventDefault()
+            console.log('form submitted')
+            console.log(e)
+            return false
+        }
+
+        const showForm = (form) => {
+            console.log(form['name'].value)
+        }
+
+        const testFunc = () => console.log('test func');
+
+        const validateNonEmpty = (formField, outputId) => {
+            const outputElement = document.getElementById(outputId)
+            if (outputElement != null) {
+                if ((formField.value.length === 0) && outputElement != null ) {
+                    outputElement.innerHTML = 'Please enter a value'
+                    return false
+                } else if (outputElement != null) {
+                    outputElement.innerHTML = ''
+                    return true
+                } else {
+                    console.log('unknown error in validateNonEmpty func.')
+                    return false
+                }
+            } else {
+                console.error('invalid outputElement in validateNonEmpty');
+                return false
+            }   
+            
+        }
+
+        const validateMsgLength = (minLength, maxLength, formField, outputId) => {
+            const outputElement = document.getElementById(outputId)
+            if (outputElement != null) {
+                if (formField.value.length < minLength || formField.value.length > maxLength) {
+                    outputElement.innerHTML = `Please enter a value ${minLength} to ${maxLength} in length.`
+                    return false
+                }
+                else if (formField.value.length >= minLength && formField.value.length <= maxLength) {
+                    outputElement.innerHTML = ''
+                    return true
+                } 
+                else {
+                    outputElement.innerHTML = 'Invalid message length!'
+                    return false
+                }
+            } else {
+                console.error('invalid outputElement in validateMsgLength');
+                return false
+            }     
+        }
+
+        const validateZipCode = (formField, outputId) => {
+            const outputElement = document.getElementById(outputId)
+            if (outputElement != null) {
+                if (isNaN(formField.value) || formField.value.length != 5) {
+                    outputElement.innerHTML = 'Please enter a 5-digit number'
+                    return false
+                } else if (!isNaN(formField.value) || formField.value.length == 5) {
+                    outputElement.innerHTML = ''
+                    return true
+                } else {
+                    outputElement.innerHTML = 'Invalid value'
+                    return false
+                }
+            } else {
+                console.error('invalid outputElement in validateZipCode')
+                return false
+            }   
+        }
+
+        const validateNumLength = (string, length) => (string.length === length || !isNaN(string))
+
+        const validateDate = (formField, outputId) => {
+            const outputElement = document.getElementById(outputId)
+            const dateToArray = formField.value.split('/')
+            if (dateToArray.length != 3 ) {
+                outputElement.innerHTML = 'invalid format (correct format: MM/DD/YYYY)'
+                return false
+            }
+            const month = dateToArray[0]
+            const day = dateToArray[1]
+            const year = dateToArray[2]
+
+            if (outputElement != null) {
+                if (!validateNumLength(month, 2) || Number(month) < 1 || Number(month) > 12) {
+                    outputElement.innerHTML = 'invalid month'
+                    return false
+                } else if (!validateNumLength(day, 2) || Number(day) < 1 || Number(day) > 31 ) {
+                    outputElement.innerHTML = 'invalid day'
+                    return false
+                } else if (!validateNumLength(year, 4) || Number(year) < 2022) {
+                    outputElement.innerHTML = 'invalid year'
+                    return false
+                } else {
+                    outputElement.innerHTML = ''
+                    return true
+                }
+            } else {
+                console.error('outputElement is null for validateDate func.')
+            }
+        }
+
+        const placeOrder = (form) => {
+            console.log(form)
+        }
+
+        const validateMyform = (form) => {
+
+            if (validateMsgLength(1, 32, form['bannerMsg'], 'bannerMsgHelp') &&
+                validateZipCode(form['zipCode'], 'zipCodeHelp') &&
+                validateDate(form['date'], 'dateHelp' ) &&
+                validateNonEmpty(form['name'], 'nameHelp') &&
+                validateNonEmpty(form['phoneNum'], 'phoneNumHelp') &&
+                validateNonEmpty(form['address'], 'addressHelp') &&
+                validateNonEmpty(form['email'], 'emailHelp') ) {
+                return true
+            }
+
+            return false
+        }
+
+        window.onload = () => {
+            // document.getElementById('showBtn').onclick = showForm(this.form)
+        }
+
+  
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="./banner-img.webp" class="banner" alt="Banner">
+        <br>
+        <div class="data-form">
+            <form action="" name="dataForm" id="dataForm" onsubmit="return validateMyform(this)">
+                <div class="form-group">
+                    <label for="">Banner Message: </label>
+                    <input 
+                        type="text" id="bannerMsg" name="bannerMsg" placeholder="32 characters maximum"
+                        onblur="validateMsgLength(2, 32, this, 'bannerMsgHelp')">
+                    <span name="bannerMsgHelp" id="bannerMsgHelp"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Zip code: </label>
+                    <input type="text" id="zipCode" name="zipCode" placeholder="#####"
+                    onblur="validateZipCode(this, 'zipCodeHelp')">
+                    <span id="zipCodeHelp"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Date: </label>
+                    <input type="text" id="date" name="date" placeholder="MM/DD/YYYY"
+                    onblur="validateDate(this, 'dateHelp')">
+                    <span id="dateHelp"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Customer name: </label>
+                    <input type="text" id="name" name="name"
+                    onblur="validateNonEmpty(this, 'nameHelp')">
+                    <span id="nameHelp"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Customer phone number: </label>
+                    <input type="text" 
+                        id="phoneNum" name="phoneNum" placeholder="###-###-####" 
+                        onblur="validateNonEmpty(this, 'phoneNumHelp')" />
+                    <span id="phoneNumHelp"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Customer Address</label>
+                    <input type="text" id="address" name="address"
+                    onblur="validateNonEmpty(this, 'addressHelp')">
+                    <span id="addressHelp"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="">Customer Email</label>
+                    <input type="text" id="email" name="email"
+                    onblur="validateNonEmpty(this, 'emailHelp')">
+                    <span id="emailHelp"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Order banner" id="submitBtn">
+                    <input type="button" value="Show data" id="showBtn" onclick="showForm(this.form)">
+                </div>
+                
+                
+                
+
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>

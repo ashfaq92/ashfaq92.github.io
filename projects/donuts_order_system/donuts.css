@@ -1,0 +1,34 @@
+body {
+  font:14px arial;
+  text-align:center;
+}
+
+#frame {
+  width:440px;
+  margin: 0 auto;
+  display: block;
+  margin-top:15px;
+
+}
+
+#left {
+  float:left;
+  width:130px;
+}
+
+div.heading {
+  font:20px arial;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+div.subheading {
+  font:15px arial;
+  font-style:italic;
+  margin-bottom:10px;
+}
+
+div.field {
+  margin-bottom:5px;
+  text-align:right;
+}
