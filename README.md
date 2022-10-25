@@ -1,6 +1,5 @@
 - 👋 Hi, I’m @ashfaq92
 - 👀 I’m interested in Software Engineering
-- 🌱 I’m currently doing Phd in Software Testing
 - 💞️ I’m looking to collaborate on open source projects
 - 📫 How to reach me ashfaq92 AT outlook DOT com
 
